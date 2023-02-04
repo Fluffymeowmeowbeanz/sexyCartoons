@@ -40,6 +40,7 @@ function showSlides(n) {
 				slides[slideIndex].style.display = "block";
 			}
 		}
-	captionText.innerHTML = document.getElementsByTagName("img")[slideIndex].alt;
+	let contain = document.getElementsByClassName("container");
+	captionText.innerHTML = contain.getElementsByTagName("img")[slideIndex].alt;
 	}
 }
