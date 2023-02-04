@@ -1,23 +1,45 @@
-let slideIndex=1;
-	showSlides(slideIndex);
+let slideIndex=0;
+showSlides(slideIndex);
 
-	function plusSlides(n){
-		showSlides(slideIndex += n);
+//Slides
+function showSlides(n) {
+	let slides = document.getElementsByClassName("mySlides");
+	let captionText = document.getElementById("caption");
+
+	//starting point
+	if(n == 0){
+		slides[slideIndex].style.display = "block";
+		slides[slideIndex].className += " active";
+		captionText.innerHTML = document.getElementsByTagName("img")[slideIndex].alt;
 	}
-
-	function currentSlide(n){
-		showSlides(slideIndex=n);
-	}
-
-	function showSlides(n){
-		let i;
-		let slides=document.getElementsByClassName("mySlides");
-		let captionText = document.getElementById("caption");
-		if (n > slides.length) {slideIndex=1}
-		if (n < 1) {slideIndex=slides.length}
-		for (i = 0; i <slides.length; i++) {
-			slides[i].style.display = "none";
+	else{
+		slides[slideIndex].style.display = "none";
+		//When adding 1 
+		if(n > 0){
+			//If out of bounds, go to start
+			if( (slideIndex + n) > (slides.length - 1) ){
+				slideIndex = 0;
+				slides[slideIndex].style.display = "block";
+			}
+			//If not out of bounds, continue on
+			else{
+				slideIndex += n;
+				slides[slideIndex].style.display = "block";
+			}
 		}
-		slides[slideIndex-1].style.display = "block";
-		captionText.innerHTML = slides[slideIndex-1].alt;
+		//When adding -1
+		else{
+			//If out of bounds, got to end
+			if( (slideIndex + n) < 0){
+				slideIndex = slides.length - 1;
+				slides[slideIndex].style.display = "block";
+			}
+			//If NOT out of bounds, continue on backwards
+			else {
+				slideIndex += n;
+				slides[slideIndex].style.display = "block";
+			}
+		}
+	captionText.innerHTML = document.getElementsByTagName("img")[slideIndex].alt;
 	}
+}
